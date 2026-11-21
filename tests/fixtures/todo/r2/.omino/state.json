@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "notes": {
+    "project": {
+      "hash": "e0886fe19cf494e8",
+      "file": "project.md",
+      "status": null
+    },
+    "s1": {
+      "hash": "2787f7e4dba5c37f",
+      "file": "stages/s1.md",
+      "status": "active"
+    },
+    "add": {
+      "hash": "e21a4db0eeea66d6",
+      "file": "work/add.md",
+      "status": "planned"
+    },
+    "del": {
+      "hash": "29a6829773f71e08",
+      "file": "work/del.md",
+      "status": "planned"
+    },
+    "done": {
+      "hash": "33f1d547b21a8956",
+      "file": "work/done.md",
+      "status": "planned"
+    }
+  }
+}

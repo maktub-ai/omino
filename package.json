@@ -1,0 +1,45 @@
+{
+  "name": "omino",
+  "version": "1.0.0",
+  "description": "A living project plan shared by people and coding agents: goals, decisions, stages, work and ideas as Markdown, with a page for people to read.",
+  "keywords": [
+    "agent",
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "planning",
+    "project-memory",
+    "markdown"
+  ],
+  "homepage": "https://github.com/maktub-ai/omino",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maktub-ai/omino.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maktub-ai/omino/issues"
+  },
+  "license": "MIT",
+  "author": "Maktub AI",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "omino": "skills/omino/scripts/omino.mjs"
+  },
+  "files": [
+    "skills/",
+    "hooks/",
+    ".claude-plugin/",
+    ".codex-plugin/",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test tests/omino.test.mjs",
+    "fixtures": "node tests/build-fixtures.mjs"
+  }
+}

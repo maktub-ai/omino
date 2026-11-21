@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "notes": {
+    "project": {
+      "hash": "e0886fe19cf494e8",
+      "file": "project.md",
+      "status": null
+    },
+    "s1": {
+      "hash": "0267bd2bc3f68103",
+      "file": "stages/s1.md",
+      "status": "closed"
+    },
+    "add": {
+      "hash": "40b9a8ddce0b8034",
+      "file": "work/add.md",
+      "status": "done"
+    },
+    "del": {
+      "hash": "040e9b7d10173588",
+      "file": "work/del.md",
+      "status": "done"
+    },
+    "done": {
+      "hash": "8a4fbee52ccd010c",
+      "file": "work/done.md",
+      "status": "done"
+    },
+    "filter": {
+      "hash": "8b81ac6f01a4d21a",
+      "file": "work/filter.md",
+      "status": "done"
+    },
+    "remind": {
+      "hash": "ee84b8b4749fefd5",
+      "file": "ideas/remind.md",
+      "status": "open"
+    }
+  }
+}

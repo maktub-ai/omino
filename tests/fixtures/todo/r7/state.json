@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "notes": {
+    "project": {
+      "hash": "e0886fe19cf494e8",
+      "file": "project.md",
+      "status": null
+    },
+    "s1": {
+      "hash": "0267bd2bc3f68103",
+      "file": "stages/s1.md",
+      "status": "closed"
+    },
+    "s2": {
+      "hash": "87c82be688eb67ce",
+      "file": "stages/s2.md",
+      "status": "active"
+    },
+    "add": {
+      "hash": "40b9a8ddce0b8034",
+      "file": "work/add.md",
+      "status": "done"
+    },
+    "category": {
+      "hash": "ff24a926b130225e",
+      "file": "work/category.md",
+      "status": "planned"
+    },
+    "del": {
+      "hash": "040e9b7d10173588",
+      "file": "work/del.md",
+      "status": "done"
+    },
+    "done": {
+      "hash": "8a4fbee52ccd010c",
+      "file": "work/done.md",
+      "status": "done"
+    },
+    "filter": {
+      "hash": "8b81ac6f01a4d21a",
+      "file": "work/filter.md",
+      "status": "done"
+    },
+    "remind": {
+      "hash": "4acc5498193b1ffe",
+      "file": "ideas/remind.md",
+      "status": "deferred"
+    }
+  }
+}

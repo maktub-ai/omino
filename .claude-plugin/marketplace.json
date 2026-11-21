@@ -1,0 +1,13 @@
+{
+  "name": "omino",
+  "owner": {
+    "name": "Maktub AI"
+  },
+  "plugins": [
+    {
+      "name": "omino",
+      "source": "./",
+      "description": "A long-lived project plan shared by people and agents: intent, decisions, stages, work and ideas as Markdown in one shared folder per project, with a reader for people."
+    }
+  ]
+}

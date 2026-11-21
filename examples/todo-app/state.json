@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "notes": {
+    "project": {
+      "hash": "e0886fe19cf494e8",
+      "file": "project.md",
+      "status": null
+    },
+    "s1": {
+      "hash": "0267bd2bc3f68103",
+      "file": "stages/s1.md",
+      "status": "closed"
+    },
+    "s2": {
+      "hash": "737f09ff6429546a",
+      "file": "stages/s2.md",
+      "status": "active"
+    },
+    "s3": {
+      "hash": "5e670ae7f2f9f6a4",
+      "file": "stages/s3.md",
+      "status": "planned"
+    },
+    "add-cat": {
+      "hash": "9258b145d6c8a121",
+      "file": "work/add-cat.md",
+      "status": "doing"
+    },
+    "add": {
+      "hash": "40b9a8ddce0b8034",
+      "file": "work/add.md",
+      "status": "done"
+    },
+    "archive": {
+      "hash": "c8f34dd39005def8",
+      "file": "work/archive.md",
+      "status": "planned"
+    },
+    "cat-field": {
+      "hash": "776cbc4fda005e65",
+      "file": "work/cat-field.md",
+      "status": "verified"
+    },
+    "cat-filter": {
+      "hash": "6c839ebe8591e504",
+      "file": "work/cat-filter.md",
+      "status": "planned"
+    },
+    "category": {
+      "hash": "b0619ee48e8d3a42",
+      "file": "work/category.md",
+      "status": "doing"
+    },
+    "count": {
+      "hash": "a371c0467a250f1b",
+      "file": "work/count.md",
+      "status": "planned"
+    },
+    "del": {
+      "hash": "040e9b7d10173588",
+      "file": "work/del.md",
+      "status": "done"
+    },
+    "done": {
+      "hash": "8a4fbee52ccd010c",
+      "file": "work/done.md",
+      "status": "done"
+    },
+    "export": {
+      "hash": "340d453d62f36e81",
+      "file": "work/export.md",
+      "status": "planned"
+    },
+    "filter": {
+      "hash": "8ed670d3b3885e18",
+      "file": "work/filter.md",
+      "status": "done"
+    },
+    "migrate": {
+      "hash": "f0128ea453408bb6",
+      "file": "work/migrate.md",
+      "status": "done"
+    },
+    "move": {
+      "hash": "3c71c6fa7fe8adcd",
+      "file": "work/move.md",
+      "status": "planned"
+    },
+    "rename": {
+      "hash": "8a921a99bfb33148",
+      "file": "work/rename.md",
+      "status": "planned"
+    },
+    "sync": {
+      "hash": "3fa217dd72c0bd8b",
+      "file": "work/sync.md",
+      "status": "planned"
+    },
+    "nl": {
+      "hash": "325fa8404aa5e7ee",
+      "file": "ideas/nl.md",
+      "status": "open"
+    },
+    "remind": {
+      "hash": "4acc5498193b1ffe",
+      "file": "ideas/remind.md",
+      "status": "deferred"
+    },
+    "theme": {
+      "hash": "c6fb62582ba8f225",
+      "file": "ideas/theme.md",
+      "status": "open"
+    },
+    "d-cat-first": {
+      "hash": "5c1ec1d29bebab42",
+      "file": "decisions/d-cat-first.md",
+      "status": null
+    },
+    "d-drag": {
+      "hash": "0ebfa94157092ff3",
+      "file": "decisions/d-drag.md",
+      "status": null
+    }
+  }
+}

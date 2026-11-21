@@ -1,0 +1,23 @@
+{
+  "name": "omino",
+  "version": "1.0.0",
+  "description": "A long-lived project plan shared by people and agents: intent, decisions, stages, work and ideas as Markdown in one shared folder per project, with a reader for people.",
+  "author": {
+    "name": "Maktub AI"
+  },
+  "homepage": "https://github.com/maktub-ai/omino",
+  "repository": "https://github.com/maktub-ai/omino",
+  "license": "MIT",
+  "keywords": [
+    "plan",
+    "project memory",
+    "agents"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Omino",
+    "shortDescription": "Project memory written by agents, read by people",
+    "developerName": "maktub-ai",
+    "category": "Productivity"
+  }
+}

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>omino</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Crect%20x%3D%229%22%20y%3D%223%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222.5%22%20fill%3D%22%234f5ae6%22/%3E%3Crect%20x%3D%229%22%20y%3D%2215%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222.5%22%20fill%3D%22%234f5ae6%22/%3E%3Crect%20x%3D%229%22%20y%3D%2227%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222.5%22%20fill%3D%22%234f5ae6%22/%3E%3Crect%20x%3D%2221%22%20y%3D%2227%22%20width%3D%2210%22%20height%3D%2210%22%20rx%3D%222.5%22%20fill%3D%22%234f5ae6%22/%3E%3C/svg%3E">
+<style>
+:root{--font-ui:'Geist','Inter',system-ui,-apple-system,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;--font-mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+--bg:#f7f8fa;--panel:#f0f1f4;--surface:#fff;--raised:#eceef2;--text:#1b1d22;--muted:#5d616a;--border:#d9dce2;--border-strong:#9a9ea7;--border-soft:#e7e9ed;--accent:#4f5ae6;--accent-bg:#ebedfb;--on-accent:#fff;--focus:#5a64ea;--success:#168a4e;--warning:#a0650b;--running:#285ca7;--warn-bg:#f8efe0;--ok-bg:#e3f4ea;--shadow:0 8px 24px #0f111514,0 1px 2px #0f11150f;color-scheme:light}
+:root[data-theme=dark]{--bg:#121317;--panel:#0e0f12;--surface:#18191d;--raised:#1f2126;--text:#e4e6ea;--muted:#989ca5;--border:#2e3138;--border-strong:#4d515a;--border-soft:#23252b;--accent:#7c86ff;--accent-bg:#1f2240;--on-accent:#000;--focus:#8a94ff;--success:#4ccb85;--warning:#e2ac4c;--running:#91baff;--warn-bg:#2a2214;--ok-bg:#15291e;--shadow:0 12px 32px #00000073;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:var(--font-ui);font-size:13px;line-height:1.5;color:var(--text);background:var(--bg)}
+button{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;min-height:48px;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.brand svg{color:var(--accent)}
+.sep{color:var(--border-strong)}
+.crumb{font-weight:500}
+.grow{flex:1}
+.sync{font-size:12px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--border);border-radius:8px;background:var(--surface);cursor:pointer}
+.btn:hover{background:var(--raised)}
+.strip{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 24px;border-bottom:1px solid var(--border);background:var(--surface)}
+.strip-t{display:flex;flex-direction:column;gap:1px}
+.strip-t b{font-size:13px;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 10px;border-radius:8px;font-size:12px;font-weight:500}
+.chip.warn{border:1px solid color-mix(in srgb,var(--warning) 45%,var(--border));background:var(--warn-bg);color:var(--warning)}
+.chip.acc{background:var(--accent-bg);color:var(--accent)}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--border);border-radius:8px;background:var(--bg)}
+.seg button{border:1px solid transparent;border-radius:6px;background:transparent;color:var(--muted);padding:4px 10px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed=true]{background:var(--surface);border-color:var(--border);color:var(--text);box-shadow:var(--shadow)}
+main{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;align-items:start;padding:20px 24px 40px}
+.card{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;background:var(--surface);overflow:hidden}
+.card.cur{box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 35%,transparent)}
+.card.closed{opacity:.72}
+.head{display:flex;flex-direction:column;gap:8px;padding:14px 16px 12px;color:inherit;text-decoration:none}
+a.head:hover{background:color-mix(in srgb,var(--raised) 55%,transparent)}
+.pt{display:flex;align-items:center;gap:8px;min-width:0}
+.pt b{flex:1;min-width:0;font-size:15px;font-weight:600;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stp{flex:none;display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.stp.t-ok{color:var(--success);background:var(--ok-bg)}.stp.t-warn{color:var(--warning);background:var(--warn-bg)}.stp.t-acc{color:var(--accent);background:var(--accent-bg)}
+.goal{color:var(--muted);font-size:12.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:3.1em}
+.prog{display:flex;flex-direction:column;gap:6px}
+.pm{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.pm .st{display:inline-flex;align-items:center;gap:6px;min-width:0;overflow:hidden;white-space:nowrap}
+.pm .st span:last-child{overflow:hidden;text-overflow:ellipsis}
+.lvb{flex:none;font-size:11px;font-weight:600;padding:1px 6px;border-radius:5px;color:var(--accent);background:var(--accent-bg)}
+.bar{height:4px;border-radius:2px;background:var(--raised);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--success)}
+.asks{display:flex;flex-direction:column;border-top:1px solid var(--border-soft);background:color-mix(in srgb,var(--warn-bg) 55%,var(--surface))}
+.ah{display:flex;align-items:center;gap:6px;padding:9px 16px 3px;font-size:12px;font-weight:500;color:var(--warning)}
+.ask{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1px 8px;align-items:baseline;padding:7px 16px;color:inherit;text-decoration:none}
+.ask:hover{background:color-mix(in srgb,var(--warning) 9%,transparent)}
+.ak{font-size:11px;font-weight:500;padding:1px 6px;border-radius:6px;border:1px solid color-mix(in srgb,var(--warning) 40%,transparent);color:var(--warning);white-space:nowrap}
+.ak.cm{border-color:color-mix(in srgb,var(--accent) 40%,transparent);color:var(--accent)}
+.ask b{font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ask .r{grid-column:2;font-size:12px;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.more{padding:4px 16px 10px;font-size:12px;color:var(--warning);text-decoration:none}
+.more:hover{text-decoration:underline}
+.foot{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 16px 12px;border-top:1px solid var(--border-soft)}
+.foot code{font:11px var(--font-mono);padding:1px 6px;border-radius:5px;background:var(--raised);color:var(--muted)}
+.foot .id{margin-left:auto;font-size:11px;color:var(--muted);white-space:nowrap}
+.empty{grid-column:1/-1;padding:40px 0;color:var(--muted);text-align:center}
+svg.gi{flex:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function () {
+  'use strict';
+  var DATA = /*__OMINO_DATA__*/null;
+  var zh = /^zh/i.test(navigator.language || '');
+  var L = zh ? {
+    all: '所有计划', plans: '份计划', decide: '项待你决定', comments: '条留言等待 agent', theme: '切换明暗外观', closed: '已结束',
+    waitN: function (n) { return n + ' 项待决定'; }, asks: '待你决定', more: function (n) { return '还有 ' + n + ' 项 →'; }, noStage: '还没有阶段', stages: function (n) { return n + ' 个阶段'; },
+    done: function (d, t) { return d + '/' + t + ' 项完成'; }, stageL: function (l) { return '阶段 ' + l; }, empty: '这台机器上还没有计划。', cm: '留言',
+    filters: { all: '全部', attn: '待你决定', active: '进行中', closed: '已结束' },
+    types: { flagged: '需复核', drift: '依据已变', unconfirmed: '待确认完成', recalled: '已召回', question: '待回答' }, ago: agoZh,
+    why: { missing: '完成时没有经过 record，缺少可以对比的依据', own: '完成之后，它的 Requirements 被修改了', upstream: '完成之后，它的某个前置条件的 Requirements 被修改了', unconfirmed: 'agent 报告已完成，还没有你的确认或工具结果', recalled: '已带回讨论，等你决定采纳还是暂缓' }
+  } : {
+    all: 'All plans', plans: 'plans', decide: 'need your decision', comments: 'comments waiting for the agent', theme: 'Toggle light / dark', closed: 'Closed',
+    waitN: function (n) { return n + ' to decide'; }, asks: 'Needs your decision', more: function (n) { return n + ' more →'; }, noStage: 'No stages yet', stages: function (n) { return n + ' stages'; },
+    done: function (d, t) { return d + '/' + t + ' done'; }, stageL: function (l) { return 'Stage ' + l; }, empty: 'No plans on this machine yet.', cm: 'Comment',
+    filters: { all: 'All', attn: 'Needs you', active: 'Active', closed: 'Closed' },
+    types: { flagged: 'Needs review', drift: 'Basis changed', unconfirmed: 'Unconfirmed done', recalled: 'Recalled', question: 'Open question' }, ago: agoEn,
+    why: { missing: 'Completed without a record, so there is no basis to compare against', own: 'Its Requirements changed after it was completed', upstream: 'The Requirements of a prerequisite changed after it was completed', unconfirmed: 'Reported done by an agent; not yet confirmed by you or a tool', recalled: 'Brought back for discussion; waiting for your decision' }
+  };
+  document.documentElement.lang = zh ? 'zh-CN' : 'en';
+  document.title = 'omino · ' + L.all;
+  function agoZh(ts) { var d = days(ts); return d === null ? '' : d < 1 ? '今天' : d < 2 ? '昨天' : d < 30 ? Math.floor(d) + ' 天前' : String(ts).slice(0, 10); }
+  function agoEn(ts) { var d = days(ts); return d === null ? '' : d < 1 ? 'today' : d < 2 ? 'yesterday' : d < 30 ? Math.floor(d) + ' days ago' : String(ts).slice(0, 10); }
+  function days(ts) { var t = Date.parse(ts); return isNaN(t) ? null : (Date.now() - t) / 864e5; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var LOGO = '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 40 40"><rect x="9" y="3" width="10" height="10" rx="2.5" fill="currentColor"/><rect x="9" y="15" width="10" height="10" rx="2.5" fill="currentColor"/><rect x="9" y="27" width="10" height="10" rx="2.5" fill="currentColor"/><rect x="21" y="27" width="10" height="10" rx="2.5" fill="currentColor"/><rect x="21.75" y="15.75" width="8.5" height="8.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.4 2"/></svg>';
+  var GL = {
+    review: 'M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4M12 8v4l2.5 2.5',
+    comment: 'M5 5h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-4 3v-3H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z',
+    levels: 'M12 4l8 4l-8 4l-8-4ZM4 12l8 4l8-4M4 16l8 4l8-4',
+    work: 'M5 4.5h14v15H5ZM8.5 9h7M8.5 12.5h7M8.5 16h4',
+    moon: 'M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z'
+  };
+  function gi(n, s) { return '<svg aria-hidden="true" class="gi" width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="' + GL[n] + '"/></svg>'; }
+
+  var theme = null, filter = 'all';
+  try { theme = localStorage.getItem('omino-theme'); filter = localStorage.getItem('omino-ov-filter') || 'all'; } catch (e) {}
+  function applyTheme() {
+    var dark = theme ? theme === 'dark' : window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  }
+
+  var plans = (DATA && DATA.plans) || [];
+  var asking = function (p) { return p.status !== 'closed' && (p.waiting.length || p.comments); };
+  // what needs the user first, then the most recently changed
+  plans.sort(function (a, b) { return (asking(b) ? 1 : 0) - (asking(a) ? 1 : 0) || (a.status === 'closed') - (b.status === 'closed') || String(b.last || '').localeCompare(String(a.last || '')); });
+  var nDecide = 0, nCmt = 0;
+  plans.forEach(function (p) { if (p.status !== 'closed') { nDecide += p.waiting.length; nCmt += p.comments; } });
+  var match = function (p) { return filter === 'all' || (filter === 'attn' ? asking(p) : filter === 'closed' ? p.status === 'closed' : p.status !== 'closed'); };
+
+  // the reasons Omino derives itself, in the reader's language; flags and questions are the plan's own words
+  function reasonOf(w) {
+    var d = w.data || {};
+    if (w.type === 'drift') return d.missing ? L.why.missing : [d.own ? L.why.own : '', d.upstream ? L.why.upstream : ''].filter(Boolean).join(zh ? '；' : '; ') || w.reason;
+    if (w.type === 'unconfirmed' || w.type === 'recalled') return L.why[w.type];
+    return w.reason;
+  }
+  function card(p) {
+    var pct = p.total ? Math.round(p.done / p.total * 100) : 0;
+    var badge = p.status === 'closed' ? '<span class="stp t-ok">' + esc(L.closed) + '</span>' : p.waiting.length ? '<span class="stp t-warn">' + esc(L.waitN(p.waiting.length)) + '</span>' : '';
+    var stage = p.stage ? '<span class="st"><span class="lvb">' + esc(L.stageL(p.stage.level)) + '</span><span>' + esc(p.stage.title) + '</span></span>' : '<span class="st">' + (p.stages ? esc(L.stages(p.stages)) : esc(L.noStage)) + '</span>';
+    var head = '<div class="pt"><b title="' + esc(p.title) + '">' + esc(p.title) + '</b>' + badge + '</div>' +
+      '<div class="goal">' + esc(p.goal || '') + '</div>' +
+      '<div class="prog"><div class="pm">' + stage + '<span>' + esc(L.done(p.done, p.total)) + '</span></div><div class="bar"><i style="width:' + pct + '%"></i></div></div>';
+    var asks = '';
+    if (p.status !== 'closed' && (p.waiting.length || p.comments)) {
+      var shown = p.waiting.slice(0, 3);
+      asks = '<div class="asks">' + (p.waiting.length ? '<div class="ah">' + gi('review', 13) + esc(L.asks) + '</div>' : '') +
+        shown.map(function (w) {
+          return '<a class="ask" href="' + esc(p.href + '#' + encodeURIComponent(w.id)) + '"><span class="ak">' + esc(L.types[w.type] || w.type) + '</span><b>' + esc(w.title) + '</b>' + (reasonOf(w) ? '<span class="r" title="' + esc(reasonOf(w)) + '">' + esc(reasonOf(w)) + '</span>' : '') + '</a>';
+        }).join('') +
+        (p.waiting.length > shown.length ? '<a class="more" href="' + esc(p.href) + '">' + esc(L.more(p.waiting.length - shown.length)) + '</a>' : '') +
+        (p.comments ? '<a class="ask" href="' + esc(p.href) + '"><span class="ak cm">' + esc(L.cm) + '</span><b>' + esc(p.comments + ' ' + L.comments) + '</b></a>' : '') + '</div>';
+    }
+    var repos = (p.repos.length ? p.repos.map(function (r) { return '<code>' + esc(r.split('/').slice(-2).join('/')) + '</code>'; }).join('') : p.folder ? '<code>' + esc(p.folder) + '</code>' : '');
+    return '<article class="card' + (p.status === 'closed' ? ' closed' : '') + (p.current ? ' cur' : '') + '">' +
+      (p.href ? '<a class="head" href="' + esc(p.href) + '">' + head + '</a>' : '<div class="head">' + head + '</div>') + asks +
+      '<div class="foot">' + repos + '<span class="id">' + esc(p.id) + (p.last ? ' · ' + esc(L.ago(p.last)) : '') + '</span></div></article>';
+  }
+
+  function render() {
+    applyTheme();
+    var list = plans.filter(match);
+    document.getElementById('app').innerHTML =
+      '<header class="top"><a class="brand" href="' + esc((DATA && DATA.home) || '#') + '">' + LOGO + '<span>omino</span></a><span class="sep">/</span><span class="crumb">' + esc(L.all) + '</span><div class="grow"></div>' +
+      (DATA && DATA.where ? '<span class="sync">' + esc(DATA.where) + '</span>' : '') +
+      '<button class="btn" id="theme" aria-label="' + esc(L.theme) + '" title="' + esc(L.theme) + '">' + gi('moon', 16) + '</button></header>' +
+      '<div class="strip"><div class="strip-t"><b>' + plans.length + ' ' + esc(L.plans) + '</b></div>' +
+      (nDecide ? '<span class="chip warn">' + gi('review', 14) + nDecide + ' ' + esc(L.decide) + '</span>' : '') +
+      (nCmt ? '<span class="chip acc">' + gi('comment', 14) + nCmt + ' ' + esc(L.comments) + '</span>' : '') +
+      '<div class="grow"></div><div class="seg" role="group">' + ['all', 'attn', 'active', 'closed'].map(function (f) { return '<button data-f="' + f + '" aria-pressed="' + (filter === f) + '">' + esc(L.filters[f]) + '</button>'; }).join('') + '</div></div>' +
+      '<main>' + (list.length ? list.map(card).join('') : '<div class="empty">' + esc(L.empty) + '</div>') + '</main>';
+  }
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest('#theme,[data-f]'); if (!t) return;
+    if (t.id === 'theme') { theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('omino-theme', theme); } catch (e) {} }
+    else { filter = t.getAttribute('data-f'); try { localStorage.setItem('omino-ov-filter', filter); } catch (e) {} }
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+{"ts":"2026-11-11T09:00:00Z","source":"user","summary":"建立项目意图：个人使用的 Todo App","said":"我想做一个自己用的 Todo App，把每天要做的事情记下来。","notes":[{"id":"project","op":"created"}]}
+{"ts":"2026-11-12T09:00:00Z","source":"user","summary":"第一阶段·本地基础版：添加、完成、删除；补充“本地”边界","said":"先做本地版，能添加待办、标记完成、删除待办就行。","notes":[{"id":"project","op":"modified"},{"id":"s1","op":"created"},{"id":"add","op":"created"},{"id":"del","op":"created"},{"id":"done","op":"created"}]}
+{"ts":"2026-11-13T09:00:00Z","source":"user","summary":"暂存“到期提醒”，约定第一阶段结束后召回","said":"以后可以加到期提醒，基础版做好后提醒我考虑一下。","notes":[{"id":"remind","op":"created"}]}

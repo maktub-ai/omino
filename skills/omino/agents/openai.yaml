@@ -1,0 +1,6 @@
+# How Codex and the ChatGPT desktop app list this skill. The skill picker matches on the display name,
+# so "Plan" is in it: typing /plan or $plan finds Omino, not only typing its name.
+interface:
+  display_name: "Omino Plan"
+  short_description: "Shared project plan: goal, decisions, stages, progress"
+  default_prompt: "Use $omino to keep this project's plan: its goal, decisions, stages and what is next."

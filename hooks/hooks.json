@@ -1,0 +1,49 @@
+{
+  "description": "Omino for Claude Code and Codex: a session brief at start (with a one-time setup request when one is needed) that also starts the plan page service, comments and edits made on the page with each prompt, and one reminder when files changed but the plan was not recorded. Every hook does nothing in a project without a plan.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/omino/scripts/omino.mjs\" hook session-start",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/omino/scripts/omino.mjs\" hook prompt",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/omino/scripts/omino.mjs\" hook stop",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/omino/scripts/omino.mjs\" hook session-end",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

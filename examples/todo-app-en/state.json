@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "notes": {
+    "project": {
+      "hash": "2772b9e0e52df080",
+      "file": "project.md",
+      "status": null
+    },
+    "s1": {
+      "hash": "cae6f411f10eae07",
+      "file": "stages/s1.md",
+      "status": "closed"
+    },
+    "s2": {
+      "hash": "c00d5900408f4da6",
+      "file": "stages/s2.md",
+      "status": "active"
+    },
+    "s3": {
+      "hash": "040f2d07407bc16b",
+      "file": "stages/s3.md",
+      "status": "planned"
+    },
+    "add-cat": {
+      "hash": "dd04bb109682b8df",
+      "file": "work/add-cat.md",
+      "status": "doing"
+    },
+    "add": {
+      "hash": "9a767b6e3a70f2c7",
+      "file": "work/add.md",
+      "status": "done"
+    },
+    "archive": {
+      "hash": "a4ab88854a6919d5",
+      "file": "work/archive.md",
+      "status": "planned"
+    },
+    "cat-field": {
+      "hash": "ef084edf72c16a05",
+      "file": "work/cat-field.md",
+      "status": "verified"
+    },
+    "cat-filter": {
+      "hash": "d48bd5cb085255b2",
+      "file": "work/cat-filter.md",
+      "status": "planned"
+    },
+    "category": {
+      "hash": "03091a6ebcb9f904",
+      "file": "work/category.md",
+      "status": "doing"
+    },
+    "del": {
+      "hash": "5fcb238859d016c9",
+      "file": "work/del.md",
+      "status": "done"
+    },
+    "done": {
+      "hash": "eceeeb873ed1b76e",
+      "file": "work/done.md",
+      "status": "done"
+    },
+    "export": {
+      "hash": "5bd79cadf8c93710",
+      "file": "work/export.md",
+      "status": "planned"
+    },
+    "filter": {
+      "hash": "4893fe8c972ca246",
+      "file": "work/filter.md",
+      "status": "done"
+    },
+    "migrate": {
+      "hash": "81a55d52d1976937",
+      "file": "work/migrate.md",
+      "status": "done"
+    },
+    "move": {
+      "hash": "323bcf78be676ba2",
+      "file": "work/move.md",
+      "status": "planned"
+    },
+    "sync": {
+      "hash": "f3583caa0f00a697",
+      "file": "work/sync.md",
+      "status": "planned"
+    },
+    "nl": {
+      "hash": "60957215dd6e6e48",
+      "file": "ideas/nl.md",
+      "status": "open"
+    },
+    "remind": {
+      "hash": "04c3ad3d3e15c0fe",
+      "file": "ideas/remind.md",
+      "status": "deferred"
+    },
+    "theme": {
+      "hash": "d71527311c0197e2",
+      "file": "ideas/theme.md",
+      "status": "open"
+    },
+    "d-cat-first": {
+      "hash": "7bc355610b6bff6f",
+      "file": "decisions/d-cat-first.md",
+      "status": null
+    },
+    "d-drag": {
+      "hash": "707a3838773ca886",
+      "file": "decisions/d-drag.md",
+      "status": null
+    }
+  }
+}
