@@ -1,5 +1,6 @@
 {
   "name": "omino",
+  "description": "Install Omino, a shared project plan for people and coding agents.",
   "owner": {
     "name": "Maktub AI"
   },

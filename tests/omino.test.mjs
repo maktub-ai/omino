@@ -774,6 +774,37 @@ test('A14 the plugin manifest, marketplace and hooks file point at the CLI', () 
   for (const ev of ['SessionStart', 'UserPromptSubmit', 'Stop', 'SessionEnd']) assert.match(hooks.hooks[ev][0].hooks[0].command, /\$\{CLAUDE_PLUGIN_ROOT\}\/skills\/omino\/scripts\/omino\.mjs" hook /);
 });
 
+test('A14 both GitHub marketplaces resolve their manifests and lifecycle hooks from the repository root', () => {
+  const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+  const readJson = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
+  const marketplaces = [
+    ['.claude-plugin/marketplace.json', '.claude-plugin/plugin.json'],
+    ['.agents/plugins/marketplace.json', '.codex-plugin/plugin.json'],
+  ];
+  for (const [file, manifest] of marketplaces) {
+    const catalogPath = path.join(root, file);
+    assert.ok(fs.existsSync(catalogPath), `missing GitHub marketplace: ${file}`);
+    const catalog = readJson(catalogPath);
+    assert.equal(catalog.name, 'omino');
+    const entry = catalog.plugins.find(({ name }) => name === 'omino');
+    assert.ok(entry, `missing omino@${catalog.name} in ${file}`);
+    if (manifest.startsWith('.claude-plugin')) assert.ok(catalog.description?.trim());
+    else {
+      assert.equal(entry.source.source, 'local');
+      assert.equal(entry.policy.installation, 'AVAILABLE');
+      assert.equal(catalog.interface.displayName, 'Omino');
+    }
+    const pluginRoot = path.resolve(root, typeof entry.source === 'string' ? entry.source : entry.source.path);
+    assert.equal(pluginRoot, root);
+    assert.equal(readJson(path.join(pluginRoot, manifest)).name, entry.name);
+    const { hooks } = readJson(path.join(pluginRoot, 'hooks', 'hooks.json'));
+    for (const event of ['SessionStart', 'UserPromptSubmit', 'Stop', 'SessionEnd']) {
+      assert.ok(hooks[event]?.some(({ hooks }) => hooks.some(({ type, command }) => type === 'command' && command.includes('scripts/omino.mjs" hook '))), `missing ${event} hook in ${file}`);
+    }
+    assert.ok(fs.existsSync(path.join(pluginRoot, 'skills', 'omino', 'scripts', 'omino.mjs')));
+  }
+});
+
 test('A14 linking decisions to the project does not flag the intent', () => {
   const dir = tmp();
   cmdInit(dir);

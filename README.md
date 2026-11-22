@@ -84,15 +84,20 @@ open omino/examples/todo-app-en/view.html      # macOS; use xdg-open on Linux
 /plugin install omino@omino
 ```
 
-**Codex** — the same repository is also a Codex plugin (`.codex-plugin/`) with the same hooks; Codex asks you to approve them once with `/hooks`.
-
-**Gemini CLI, Kimi Code CLI and other agents** — one command puts the skill where each agent on your machine looks for skills (including the shared `~/.agents/skills/`). Use whichever package manager you have:
+**Codex** — add the project's GitHub marketplace and install the plugin from it:
 
 ```sh
-npx omino install          # npm
-pnpm dlx omino install     # pnpm
-bunx omino install         # bun
-yarn dlx omino install     # yarn
+codex plugin marketplace add maktub-ai/omino
+codex plugin add omino@omino
+```
+
+Start a new Codex session and open `/hooks` to review and trust Omino's lifecycle hooks. Only trusted hooks run. Both installs above use Omino's public GitHub repository, not the platforms' official plugin directories.
+
+**Gemini CLI, Kimi Code CLI and other agents** — clone Omino and run its skill installer with Node.js 18 or newer. It puts the skill where supported agents look for it (including `~/.agents/skills/`). Omino is not currently published on npm.
+
+```sh
+git clone https://github.com/maktub-ai/omino.git
+node omino/skills/omino/scripts/omino.mjs install
 ```
 
 The first time the agent uses it, it offers `omino setup`, which adds the hooks only for the agent you are using, to `~/.gemini/settings.json` or `~/.kimi-code/config.toml`. Kimi has no session-start context, so the brief arrives with your first message instead.
@@ -197,7 +202,7 @@ Most of the time you just talk and the agent decides, turn by turn. When you wan
 | `/omino-hold` | hold | Park an idea with a condition for bringing it back | yes |
 | `/omino-clear` | line clear | Wrap up a stage: confirm what is done, settle what needs review, close it | after you confirm |
 
-After `npx omino install` they are `/omino-plan` and so on in Claude Code and `$omino-plan` in Codex; with the Claude Code plugin they are `/omino:plan` and so on.
+After running the skill installer they are `/omino-plan` and so on in Claude Code and `$omino-plan` in Codex; with the Claude Code plugin they are `/omino:plan` and so on.
 
 ## Commands
 
@@ -303,7 +308,7 @@ Light and dark, English and Chinese. Drag the panel edges to resize them.
 - [x] v0.5: one shared plan per project outside the working tree (`~/.omino`), with its own history; `where`, `migrate`, `allow`, `setup`; hooks for Codex too; a viewer redrawn with icons and stage tracks
 - [x] v0.5.1: what a plan is for — goals, `init --name`, links kept local unless shared, lanes per repository, `close`, an overview of every plan; one writer at a time
 - [x] v0.6: one page service for every plan on the machine — edit notes, confirm and comment on the page; no agent needs to be listening
-- [x] 1.0: public release — six commands (`/omino-plan` … `/omino-clear`), `npx omino install`, the Claude Code and Codex plugins, hooks for Kimi Code CLI and Gemini CLI
+- [x] 1.0: public release — six commands (`/omino-plan` … `/omino-clear`), the skill installer, the Claude Code and Codex plugins, hooks for Kimi Code CLI and Gemini CLI
 - [ ] Next: sync — share a plan between machines and people (a git remote first, then a small self-hosted server)
 
 ## Development

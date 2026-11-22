@@ -72,15 +72,20 @@ open omino/examples/todo-app/view.html      # macOS；Linux 用 xdg-open
 /plugin install omino@omino
 ```
 
-**Codex**：同一个仓库也是 Codex 插件（`.codex-plugin/`），用的是同一套 hook；Codex 会让你在 `/hooks` 里批准一次。
-
-**Gemini CLI、Kimi Code CLI 和其他 agent**：一条命令把 skill 放进本机各个 agent 读取 skill 的目录（包括多个工具共用的 `~/.agents/skills/`），用你手边的包管理器即可：
+**Codex**：添加 Omino 的 GitHub marketplace，再安装插件：
 
 ```sh
-npx omino install          # npm
-pnpm dlx omino install     # pnpm
-bunx omino install         # bun
-yarn dlx omino install     # yarn
+codex plugin marketplace add maktub-ai/omino
+codex plugin add omino@omino
+```
+
+开始新的 Codex 会话，在 `/hooks` 里查看并信任 Omino 的 hook。只有你信任的 hook 才会运行。以上两个插件均由 Omino 的公开 GitHub 仓库分发，不是平台官方插件目录。
+
+**Gemini CLI、Kimi Code CLI 和其他 agent**：克隆 Omino，用 Node.js 18 或以上运行 skill 安装器。它会把 skill 放到支持的 agent 查找 skill 的位置（包括 `~/.agents/skills/`）。Omino 目前没有发布到 npm。
+
+```sh
+git clone https://github.com/maktub-ai/omino.git
+node omino/skills/omino/scripts/omino.mjs install
 ```
 
 agent 第一次用到时会提出运行 `omino setup`，只给你正在用的 agent 加 hook，写进 `~/.gemini/settings.json` 或 `~/.kimi-code/config.toml`。在 Codex 里用不会问 Gemini、Kimi 的事。Kimi 在会话开始时不接收上下文，所以计划摘要会随你的第一条消息一起送达。
@@ -129,7 +134,7 @@ Omino 会在首条消息时载入会话工作目录的计划，转交新留言�
 | `/omino-hold` | 暂存 | 把一个想法先放着，带上什么时候拿回来的条件 | 改 |
 | `/omino-clear` | 消行 | 收尾一个阶段：确认完成、处理需复核的事、关掉这个阶段 | 你确认后改 |
 
-用 `npx omino install` 安装后，Claude Code 里写作 `/omino-plan`，Codex 里写作 `$omino-plan`；用 Claude Code 插件时写作 `/omino:plan`。
+用上述安装器安装 skill 后，Claude Code 里写作 `/omino-plan`，Codex 里写作 `$omino-plan`；用 Claude Code 插件时写作 `/omino:plan`。
 
 ## 命令
 

@@ -1,0 +1,20 @@
+{
+  "name": "omino",
+  "interface": {
+    "displayName": "Omino"
+  },
+  "plugins": [
+    {
+      "name": "omino",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
