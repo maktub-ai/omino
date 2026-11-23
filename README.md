@@ -79,11 +79,10 @@ open omino/examples/todo-app-en/view.html      # macOS; use xdg-open on Linux
 
 ### Install for your agent
 
-**Claude Code** — or install the plugin. It brings the skill, the hooks and the six commands, spelled `/omino:plan` and so on (Claude Code adds the plugin's name to every plugin command):
+**Skill only (Skills CLI)** — install the skill without lifecycle hooks. For hooks in Codex or Claude Code, use the matching plugin below.
 
-```
-/plugin marketplace add maktub-ai/omino
-/plugin install omino@omino
+```sh
+npx skills add maktub-ai/omino
 ```
 
 **Codex** — add the project's GitHub marketplace and install the plugin from it:
@@ -93,13 +92,16 @@ codex plugin marketplace add maktub-ai/omino
 codex plugin add omino@omino
 ```
 
-Start a new Codex session and open `/hooks` to review and trust Omino's lifecycle hooks. Only trusted hooks run. Both installs above use Omino's public GitHub repository, not the platforms' official plugin directories.
+Start a new Codex session and open `/hooks` to review and trust Omino's lifecycle hooks. Only trusted hooks run.
 
-**Skill only (Skills CLI)** — install the skill without lifecycle hooks. For hooks in Codex or Claude Code, use the matching plugin above.
+**Claude Code** — or install the plugin. It brings the skill, the hooks and the six commands, spelled `/omino:plan` and so on (Claude Code adds the plugin's name to every plugin command):
 
-```sh
-npx skills add maktub-ai/omino
 ```
+/plugin marketplace add maktub-ai/omino
+/plugin install omino@omino
+```
+
+Both plugins are distributed through Omino's public GitHub marketplace, not the platforms' official plugin directories.
 
 **Gemini CLI, Kimi Code CLI and other agents** — clone Omino and run its skill installer with Node.js 18 or newer. It puts the skill where supported agents look for it (including `~/.agents/skills/`). Omino is not currently published on npm.
 

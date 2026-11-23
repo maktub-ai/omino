@@ -67,11 +67,10 @@ open omino/examples/todo-app/view.html      # macOS；Linux 用 xdg-open
 
 ### 给你的 agent 装上
 
-**Claude Code**：也可以安装插件，skill、hook 和六个命令一起装好，命令写作 `/omino:plan` 这样（Claude Code 会给插件命令加上插件名）：
+**仅安装技能（Skills CLI）**：这个命令不会安装生命周期 hooks。Codex 或 Claude Code 如需 hooks，请用下方对应的插件。
 
-```
-/plugin marketplace add maktub-ai/omino
-/plugin install omino@omino
+```sh
+npx skills add maktub-ai/omino
 ```
 
 **Codex**：添加 Omino 的 GitHub marketplace，再安装插件：
@@ -81,13 +80,16 @@ codex plugin marketplace add maktub-ai/omino
 codex plugin add omino@omino
 ```
 
-开始新的 Codex 会话，在 `/hooks` 里查看并信任 Omino 的 hook。只有你信任的 hook 才会运行。以上两个插件均由 Omino 的公开 GitHub 仓库分发，不是平台官方插件目录。
+开始新的 Codex 会话，在 `/hooks` 里查看并信任 Omino 的 hook。只有你信任的 hook 才会运行。
 
-**仅安装技能（Skills CLI）**：这个命令不会安装生命周期 hooks。Codex 或 Claude Code 如需 hooks，请用上面的对应插件。
+**Claude Code**：也可以安装插件，skill、hook 和六个命令一起装好，命令写作 `/omino:plan` 这样（Claude Code 会给插件命令加上插件名）：
 
-```sh
-npx skills add maktub-ai/omino
 ```
+/plugin marketplace add maktub-ai/omino
+/plugin install omino@omino
+```
+
+这两个插件均由 Omino 的公开 GitHub 仓库分发，不是平台的官方插件目录。
 
 **Gemini CLI、Kimi Code CLI 和其他 agent**：克隆 Omino，用 Node.js 18 或以上运行 skill 安装器。它会把 skill 放到支持的 agent 查找 skill 的位置（包括 `~/.agents/skills/`）。Omino 目前没有发布到 npm。
 
