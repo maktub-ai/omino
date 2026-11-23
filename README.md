@@ -19,6 +19,8 @@
 </p>
 
 <p>
+  <a href="https://omino.mandala.pub/">Website</a> ·
+  <a href="https://github.com/maktub-ai/omino">Star on GitHub</a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="#commands">Commands</a> ·
@@ -92,6 +94,12 @@ codex plugin add omino@omino
 ```
 
 Start a new Codex session and open `/hooks` to review and trust Omino's lifecycle hooks. Only trusted hooks run. Both installs above use Omino's public GitHub repository, not the platforms' official plugin directories.
+
+**Skill only (Skills CLI)** — install the skill without lifecycle hooks. For hooks in Codex or Claude Code, use the matching plugin above.
+
+```sh
+npx skills add maktub-ai/omino
+```
 
 **Gemini CLI, Kimi Code CLI and other agents** — clone Omino and run its skill installer with Node.js 18 or newer. It puts the skill where supported agents look for it (including `~/.agents/skills/`). Omino is not currently published on npm.
 

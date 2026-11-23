@@ -16,6 +16,8 @@
   <a href="#怎么工作">怎么工作</a> ·
   <a href="#命令">命令</a> ·
   <a href="#常见问题">常见问题</a> ·
+  <a href="https://omino.mandala.pub/">官网</a> ·
+  <a href="https://github.com/maktub-ai/omino">在 GitHub 加星</a> ·
   <a href="README.md">English</a>
 </p>
 
@@ -80,6 +82,12 @@ codex plugin add omino@omino
 ```
 
 开始新的 Codex 会话，在 `/hooks` 里查看并信任 Omino 的 hook。只有你信任的 hook 才会运行。以上两个插件均由 Omino 的公开 GitHub 仓库分发，不是平台官方插件目录。
+
+**仅安装技能（Skills CLI）**：这个命令不会安装生命周期 hooks。Codex 或 Claude Code 如需 hooks，请用上面的对应插件。
+
+```sh
+npx skills add maktub-ai/omino
+```
 
 **Gemini CLI、Kimi Code CLI 和其他 agent**：克隆 Omino，用 Node.js 18 或以上运行 skill 安装器。它会把 skill 放到支持的 agent 查找 skill 的位置（包括 `~/.agents/skills/`）。Omino 目前没有发布到 npm。
 
